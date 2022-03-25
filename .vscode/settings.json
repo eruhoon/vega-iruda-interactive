@@ -4,5 +4,6 @@
   "deno.codeLens.referencesAllFunctions": true,
   "deno.enable": true,
   "deno.lint": true,
-  "deno.suggest.completeFunctionCalls": true
+  "deno.suggest.completeFunctionCalls": true,
+  "editor.defaultFormatter": "denoland.vscode-deno"
 }
