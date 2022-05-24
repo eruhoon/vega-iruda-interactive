@@ -26,7 +26,6 @@ export class WebsocketClient implements SocketClient {
   onConnected(callback: OnConnectedCallback): void {
     this.#onConnectedCb = callback;
   }
-
   onDisconnected(callback: OnDisconnectedCallback): void {
     this.#onDisconnectedCb = callback;
   }
