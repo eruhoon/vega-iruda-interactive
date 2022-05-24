@@ -1,4 +1,4 @@
-import { WebsocketClient } from './src/network/WebSocketClient.ts';
+import { WebsocketClient } from './src/network/WebsocketClient.ts';
 import { config } from 'https://deno.land/std@0.131.0/dotenv/mod.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
