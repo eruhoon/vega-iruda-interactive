@@ -81,8 +81,26 @@ export class WebsocketClient implements SocketClient {
     });
   }
 
-  #sendLogin(bots: SocketSenderProfile[]) {
-    this.#send({ commandType: 'bot-login', resource: { bots: bots } });
+  sendChat2(botHash: string, message: SocketSendMessage): void {
+    this.#send({
+      commandType: 'bot-chat',
+      resource: {
+        bot: botHash,
+        msg: message,
+        type: 'chat',
+      },
+    });
+  }
+
+  #sendLogin(bots: Bot[]) {
+    this.#send({
+      commandType: 'bot-login',
+      resource: {
+        bots: bots.map((bot) => {
+          return { hash: bot.hash, icon: bot.icon, nickname: bot.nickname };
+        }),
+      },
+    });
   }
 
   #send(param: SendParam) {
@@ -90,7 +108,7 @@ export class WebsocketClient implements SocketClient {
   }
 }
 
-type SendParam = SendChatParam | LoginParam;
+type SendParam = SendChatParam | SendChatParam2 | LoginParam;
 
 type SendChatParam = {
   commandType: 'bot-chat';
@@ -101,9 +119,17 @@ type SendChatParam = {
   };
 };
 
+type SendChatParam2 = {
+  commandType: 'bot-chat';
+  resource: {
+    bot: string;
+    type: 'chat';
+    msg: SocketSendMessage;
+  };
+};
 type LoginParam = {
   commandType: 'bot-login';
   resource: {
-    bots: SocketSenderProfile[];
+    bots: { hash: string; icon: string; nickname: string }[];
   };
 };

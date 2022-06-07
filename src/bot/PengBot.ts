@@ -60,7 +60,7 @@ export class PengBot implements Bot {
       }
 
       if (value.value.text === '99') {
-        this.#client.sendChat(bot, '간델게고수');
+        this.#client.sendChat2(this.hash, '간델게고수');
       }
 
       if (value.value.text === '11') {
