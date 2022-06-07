@@ -28,4 +28,7 @@ client.onDisconnected(() => {
   console.log('disconnected');
 });
 
-client.connect();
+client.connect([
+  pengBot,
+  diceBot,
+]);

@@ -2,14 +2,15 @@ import {
   StandardWebSocketClient,
   WebSocketClient,
 } from 'https://deno.land/x/websocket@v0.1.3/mod.ts';
+import { Bot } from '../data/Bot.d.ts';
 import {
   OnConnectedCallback,
   OnDisconnectedCallback,
   OnMessageCallback,
-  SocketSendMessage,
   SocketClient,
   SocketReceivedMessage,
   SocketSenderProfile,
+  SocketSendMessage,
 } from './SocketClient.d.ts';
 
 export class WebsocketClient implements SocketClient {
@@ -34,11 +35,12 @@ export class WebsocketClient implements SocketClient {
     this.#onMessageCb = callback;
   }
 
-  connect(): void {
+  connect(bots: Bot[]): void {
     this.#client = new StandardWebSocketClient(this.#host);
 
     this.#client.on('open', () => {
-      this.#client?.send(JSON.stringify({ commandType: 'bot-login' }));
+      this.#sendLogin(bots);
+      //this.#client?.send(JSON.stringify({ commandType: 'bot-login' }));
 
       this.#onConnectedCb();
     });
@@ -79,12 +81,16 @@ export class WebsocketClient implements SocketClient {
     });
   }
 
+  #sendLogin(bots: SocketSenderProfile[]) {
+    this.#send({ commandType: 'bot-login', resource: { bots: bots } });
+  }
+
   #send(param: SendParam) {
     this.#client?.send(JSON.stringify(param));
   }
 }
 
-type SendParam = SendChatParam;
+type SendParam = SendChatParam | LoginParam;
 
 type SendChatParam = {
   commandType: 'bot-chat';
@@ -92,5 +98,12 @@ type SendChatParam = {
     bot: SocketSenderProfile;
     msg: SocketSendMessage;
     type: 'chat';
+  };
+};
+
+type LoginParam = {
+  commandType: 'bot-login';
+  resource: {
+    bots: SocketSenderProfile[];
   };
 };

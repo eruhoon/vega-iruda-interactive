@@ -3,10 +3,12 @@ import {
   SocketReceivedMessage,
   SocketSenderProfile,
 } from '../network/SocketClient.d.ts';
+import { Bot } from '../data/Bot.d.ts';
 
-export class PengBot {
-  #icon = 'https://i.imgur.com/ID0sKjB.jpg';
-  #nickname = '펭 봇';
+export class PengBot implements Bot {
+  readonly hash = 'peng-bot';
+  readonly icon = 'https://i.imgur.com/ID0sKjB.jpg';
+  readonly nickname = '펭 봇';
   #client: SocketClient;
 
   #numberChanged = false;
@@ -17,7 +19,7 @@ export class PengBot {
   }
 
   #asSender(): SocketSenderProfile {
-    return { icon: this.#icon, nickname: this.#nickname };
+    return { icon: this.icon, nickname: this.nickname };
   }
 
   onMessage(msg: SocketReceivedMessage) {
@@ -52,6 +54,9 @@ export class PengBot {
       }
       if (value.value.text === 'ㅇㅂㄱ') {
         this.#client.sendChat(bot, '이보세요 간님 ㅋㅋㅋㅋ');
+      }
+      if (value.value.text === 'ㅇㅂㅇ') {
+        this.#client.sendChat(bot, '이보세요 융뎅구리 ㅋㅋㅋㅋ');
       }
 
       if (value.value.text === '99') {
