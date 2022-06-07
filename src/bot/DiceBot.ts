@@ -20,12 +20,11 @@ export class DiceBot implements Bot {
   }
 
   onMessage(msg: SocketReceivedMessage) {
-    const bot = this.#asSender();
     const value = msg.value;
     if (value.type === 'chat') {
-      if (value.value.text === '@주사위1') {
+      if (value.value.text === '@주사위') {
         const rand = Math.ceil(Math.random() * 6);
-        this.#client.sendChat(bot, rand.toString());
+        this.#client.sendChat2(this.hash, rand.toString());
       }
     }
   }
