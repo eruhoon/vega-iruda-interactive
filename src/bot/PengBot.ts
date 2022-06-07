@@ -34,7 +34,7 @@ export class PengBot implements Bot {
       } else if (value.value.text === '2' && this.#number === 1) {
         this.#numberChanged = true;
         this.#number = 2;
-        this.#client.sendChat(bot, '짝');
+        this.#client.sendChat(this.hash, '짝');
       } else if (value.value.text === '짝' && this.#number === 2) {
         this.#numberChanged = true;
         this.#number = 3;
@@ -43,50 +43,50 @@ export class PengBot implements Bot {
         this.#number = 4;
       } else if (value.value.text === '5' && this.#number === 4) {
         this.#numberChanged = false;
-        this.#client.sendChat(bot, '하겟냐');
+        this.#client.sendChat(this.hash, '하겟냐');
       }
       //   if (value.value.text === '1') {
       //     this.#client.sendChat(bot, '아쉬워요 ㅠㅠㅠ');
       //   }
 
       if (value.value.text === 'ㅇㅂㅂ') {
-        this.#client.sendChat(bot, '이보세요 별님 ㅋㅋㅋㅋ');
+        this.#client.sendChat(this.hash, '이보세요 별님 ㅋㅋㅋㅋ');
       }
       if (value.value.text === 'ㅇㅂㄱ') {
-        this.#client.sendChat(bot, '이보세요 간님 ㅋㅋㅋㅋ');
+        this.#client.sendChat(this.hash, '이보세요 간님 ㅋㅋㅋㅋ');
       }
       if (value.value.text === 'ㅇㅂㅇ') {
-        this.#client.sendChat(bot, '이보세요 융뎅구리 ㅋㅋㅋㅋ');
+        this.#client.sendChat(this.hash, '이보세요 융뎅구리 ㅋㅋㅋㅋ');
       }
 
       if (value.value.text === '99') {
-        this.#client.sendChat2(this.hash, '간델게고수');
+        this.#client.sendChat(this.hash, '간델게고수');
       }
 
       if (value.value.text === '11') {
-        this.#client.sendChat(bot, '11 반응하는 펭봇입니다.');
+        this.#client.sendChat(this.hash, '11 반응하는 펭봇입니다.');
       }
       if (value.value.text === '12') {
-        this.#client.sendChat(bot, '12도  반응하는 펭봇입니다.');
+        this.#client.sendChat(this.hash, '12도  반응하는 펭봇입니다.');
       }
       if (value.value.text === '13') {
-        this.#client.sendChat(bot, '13도 음...  반응하는 펭봇입니다.');
+        this.#client.sendChat(this.hash, '13도 음...  반응하는 펭봇입니다.');
       }
       if (value.value.text === '14') {
-        this.#client.sendChat(bot, '14까지..도 뭐 반응하는 펭봇입니다.');
+        this.#client.sendChat(this.hash, '14까지..도 뭐 반응하는 펭봇입니다.');
       }
       if (value.value.text === '하미') {
-        this.#client.sendChat(bot, '하미귀여워요');
+        this.#client.sendChat(this.hash, '하미귀여워요');
       }
       if (value.value.text === '서리') {
-        this.#client.sendChat(bot, '서리이뻐요');
+        this.#client.sendChat(this.hash, '서리이뻐요');
       }
       if (value.value.text === '하미서리') {
-        this.#client.sendChat(bot, '하미서리조와');
+        this.#client.sendChat(this.hash, '하미서리조와');
       }
 
       if (value.value.text === '간삐') {
-        this.#client.sendChat(bot, '');
+        this.#client.sendChat(this.hash, '...');
       }
     }
 

@@ -24,7 +24,7 @@ export class DiceBot implements Bot {
     if (value.type === 'chat') {
       if (value.value.text === '@주사위') {
         const rand = Math.ceil(Math.random() * 6);
-        this.#client.sendChat2(this.hash, rand.toString());
+        this.#client.sendChat(this.hash, rand.toString());
       }
     }
   }

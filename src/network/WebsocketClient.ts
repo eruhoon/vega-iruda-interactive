@@ -70,18 +70,7 @@ export class WebsocketClient implements SocketClient {
     });
   }
 
-  sendChat(bot: SocketSenderProfile, message: SocketSendMessage): void {
-    this.#send({
-      commandType: 'bot-chat',
-      resource: {
-        bot: bot,
-        msg: message,
-        type: 'chat',
-      },
-    });
-  }
-
-  sendChat2(botHash: string, message: SocketSendMessage): void {
+  sendChat(botHash: string, message: SocketSendMessage): void {
     this.#send({
       commandType: 'bot-chat',
       resource: {
