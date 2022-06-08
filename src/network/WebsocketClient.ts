@@ -81,6 +81,17 @@ export class WebsocketClient implements SocketClient {
     });
   }
 
+  sendGeneralPurposeCard(botHash: string, message: SocketSendMessage): void {
+    this.#send({
+      commandType: 'bot-chat',
+      resource: {
+        bot: botHash,
+        msg: message,
+        type: 'general-purpose-card',
+      },
+    });
+  }
+
   #sendLogin(bots: Bot[]) {
     this.#send({
       commandType: 'bot-login',
@@ -97,18 +108,9 @@ export class WebsocketClient implements SocketClient {
   }
 }
 
-type SendParam = SendChatParam | SendChatParam2 | LoginParam;
+type SendParam = SendChatParam | SendGeneralPurposeCardParam | LoginParam;
 
 type SendChatParam = {
-  commandType: 'bot-chat';
-  resource: {
-    bot: SocketSenderProfile;
-    msg: SocketSendMessage;
-    type: 'chat';
-  };
-};
-
-type SendChatParam2 = {
   commandType: 'bot-chat';
   resource: {
     bot: string;
@@ -116,6 +118,16 @@ type SendChatParam2 = {
     msg: SocketSendMessage;
   };
 };
+
+type SendGeneralPurposeCardParam = {
+  commandType: 'bot-chat';
+  resource: {
+    bot: string;
+    type: 'general-purpose-card';
+    msg: SocketSendMessage;
+  };
+};
+
 type LoginParam = {
   commandType: 'bot-login';
   resource: {

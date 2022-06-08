@@ -7,6 +7,7 @@ export interface SocketClient {
 
   connect(bots: Bot[]): void;
   sendChat(botHash: string, message: SocketSendMessage): void;
+  sendGeneralPurposeCard(botHash: string, message: SocketSendMessage): void;
 }
 
 export type OnConnectedCallback = () => void;

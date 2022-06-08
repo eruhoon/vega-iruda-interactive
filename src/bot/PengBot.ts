@@ -6,7 +6,7 @@ import {
 import { Bot } from '../data/Bot.d.ts';
 
 export class PengBot implements Bot {
-  readonly hash = 'peng-bot';
+  readonly hash = 'peng-bot2';
   readonly icon = 'https://i.imgur.com/ID0sKjB.jpg';
   readonly nickname = '펭 봇';
   #client: SocketClient;
@@ -28,6 +28,18 @@ export class PengBot implements Bot {
 
     const value = msg.value;
     if (value.type === 'chat') {
+      if (value.value.text === '박스테스트') {
+        this.#client.sendChat(this.hash, '박스테스트1');
+        this.#client.sendGeneralPurposeCard(
+          this.hash,
+          JSON.stringify({
+            title: '우...마...',
+            subtitle: '무스,,메.,,',
+            icon: 'https://data.onnada.com/anime/202012/thumb300x400_2070905244_8a48c2b8_0.png',
+            orientation: 'vertical',
+          })
+        );
+      }
       if (value.value.text === '1' && this.#number === 0) {
         this.#numberChanged = true;
         this.#number = 1;
