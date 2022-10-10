@@ -2,14 +2,16 @@ import { WebsocketClient } from './src/network/WebsocketClient.ts';
 import { config } from 'https://deno.land/std@0.131.0/dotenv/mod.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
+import { CoronaBot } from './src/bot/CoronaBot.ts';
 
 const env = await config();
 
 const client = new WebsocketClient(env.WEB_SOCKET_HOST);
 const pengBot = new PengBot(client);
 const diceBot = new DiceBot(client);
+const coronaBot = new CoronaBot(client);
 
-const bots = [pengBot, diceBot];
+const bots = [pengBot, diceBot, coronaBot];
 
 client.onConnected(() => {
   console.log('connected');
