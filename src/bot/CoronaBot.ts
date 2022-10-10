@@ -18,7 +18,7 @@ export class CoronaBot implements Bot {
   onMessage(msg: SocketReceivedMessage) {
     const value = msg.value;
     if (value.type === 'chat') {
-      if (value.value.text === '!코로나') {
+      if (value.value.text === '@코로나') {
         this.fetchSite().then((it) => {
           this.#client.sendGeneralPurposeCard(
             this.hash,
