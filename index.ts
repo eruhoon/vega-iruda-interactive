@@ -9,6 +9,8 @@ const client = new WebsocketClient(env.WEB_SOCKET_HOST);
 const pengBot = new PengBot(client);
 const diceBot = new DiceBot(client);
 
+const bots = [pengBot, diceBot];
+
 client.onConnected(() => {
   console.log('connected');
   // const bot = {
@@ -20,15 +22,11 @@ client.onConnected(() => {
 
 client.onMessage((msg) => {
   console.log(msg);
-  pengBot.onMessage(msg);
-  diceBot.onMessage(msg);
+  bots.forEach((bot) => bot.onMessage(msg));
 });
 
 client.onDisconnected(() => {
   console.log('disconnected');
 });
 
-client.connect([
-  pengBot,
-  diceBot,
-]);
+client.connect(bots);

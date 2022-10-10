@@ -9,7 +9,6 @@ import {
   OnMessageCallback,
   SocketClient,
   SocketReceivedMessage,
-  SocketSenderProfile,
   SocketSendMessage,
 } from './SocketClient.d.ts';
 
