@@ -3,6 +3,7 @@ import { config } from 'https://deno.land/std@0.131.0/dotenv/mod.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
 import { CoronaBot } from './src/bot/CoronaBot.ts';
+import { MaplestoryBot } from './src/bot/MaplestoryBot.ts';
 
 const env = await config();
 
@@ -10,8 +11,9 @@ const client = new WebsocketClient(env.WEB_SOCKET_HOST);
 const pengBot = new PengBot(client);
 const diceBot = new DiceBot(client);
 const coronaBot = new CoronaBot(client);
+const mapleBot = new MaplestoryBot(client);
 
-const bots = [pengBot, diceBot, coronaBot];
+const bots = [pengBot, diceBot, coronaBot, mapleBot];
 
 client.onConnected(() => {
   console.log('connected');
