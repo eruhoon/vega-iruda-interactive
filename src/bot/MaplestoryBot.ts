@@ -1,4 +1,5 @@
 import { Bot } from '../data/Bot.d.ts';
+import { MapleCalendarLoader } from '../lib/maple/MapleCalendarLoader.ts';
 import { MapleEventLoader } from '../lib/maple/MapleEventLoader.ts';
 import { MapleUserLoader } from '../lib/maple/MapleUserLoader.ts';
 import {
@@ -13,6 +14,7 @@ export class MaplestoryBot implements Bot {
   #client: SocketClient;
   #userLoader = new MapleUserLoader();
   #eventLoader = new MapleEventLoader();
+  #calendarLoader = new MapleCalendarLoader();
 
   constructor(client: SocketClient) {
     this.#client = client;
@@ -51,10 +53,9 @@ export class MaplestoryBot implements Bot {
             events && this.#client.sendChat(this.hash, '메이플이벤트 나올곳');
           });
         } else if (text === '@메달력') {
-          this.#client.sendChat(
-            this.hash,
-            'https://cs.nexon.com/helpboard/popuphelpview/22065'
-          );
+          this.#calendarLoader.load().then((img) => {
+            img && this.#client.sendChat(this.hash, img);
+          });
         }
       }
     }
