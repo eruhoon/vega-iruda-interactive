@@ -7,5 +7,13 @@
   "deno.suggest.completeFunctionCalls": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "editor.formatOnSave": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "deno.inlayHints.parameterTypes.enabled": false,
+  "deno.inlayHints.propertyDeclarationTypes.enabled": false,
+  "deno.inlayHints.variableTypes.suppressWhenTypeMatchesName": false,
+  "deno.inlayHints.variableTypes.enabled": false,
+  "deno.inlayHints.parameterNames.suppressWhenArgumentMatchesName": false,
+  "deno.inlayHints.functionLikeReturnTypes.enabled": false,
+  "deno.inlayHints.enumMemberValues.enabled": false,
+  "deno.inlayHints.parameterNames.enabled": "none"
 }
