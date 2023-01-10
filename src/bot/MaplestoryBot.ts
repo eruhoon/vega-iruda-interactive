@@ -50,6 +50,11 @@ export class MaplestoryBot implements Bot {
           this.#eventLoader.load().then((events) => {
             events && this.#client.sendChat(this.hash, '메이플이벤트 나올곳');
           });
+        } else if (text === '@메달력') {
+          this.#client.sendChat(
+            this.hash,
+            'https://cs.nexon.com/helpboard/popuphelpview/22065'
+          );
         }
       }
     }
