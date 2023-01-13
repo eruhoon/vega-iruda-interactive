@@ -9,6 +9,7 @@ export class PengBot implements Bot {
   readonly hash = 'peng-bot2';
   readonly icon = 'https://i.imgur.com/ID0sKjB.jpg';
   readonly nickname = '펭 봇';
+  readonly defaultMute: boolean = false;
   #client: SocketClient;
 
   #numberChanged = false;
@@ -33,10 +34,9 @@ export class PengBot implements Bot {
           JSON.stringify({
             title: '우...마...',
             subtitle: '무스,,메.,,',
-            icon:
-              'https://data.onnada.com/anime/202012/thumb300x400_2070905244_8a48c2b8_0.png',
+            icon: 'https://data.onnada.com/anime/202012/thumb300x400_2070905244_8a48c2b8_0.png',
             orientation: 'vertical',
-          }),
+          })
         );
       }
       if (value.value.text === '1' && this.#number === 0) {

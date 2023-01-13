@@ -9,6 +9,7 @@ export class DiceBot implements Bot {
   readonly hash = 'dice-bot';
   readonly icon = 'https://i.imgur.com/ZxiQWxu.png';
   readonly nickname = '주사위 봇';
+  readonly defaultMute: boolean = false;
   #client: SocketClient;
 
   constructor(client: SocketClient) {

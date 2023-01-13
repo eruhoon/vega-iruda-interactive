@@ -9,6 +9,7 @@ export class CoronaBot implements Bot {
   readonly hash: string = 'corona-bot';
   readonly icon: string = 'https://i.imgur.com/el4WyBdb.png';
   readonly nickname: string = '코로나 봇';
+  readonly defaultMute: boolean = false;
   #client: SocketClient;
 
   constructor(client: SocketClient) {
@@ -27,7 +28,7 @@ export class CoronaBot implements Bot {
               subtitle: it.date,
               icon: 'https://i.imgur.com/B9H3UYL.png',
               orientation: 'horizontal',
-            }),
+            })
           );
         });
       }

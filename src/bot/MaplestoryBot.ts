@@ -11,6 +11,7 @@ export class MaplestoryBot implements Bot {
   readonly hash: string = 'maple-bot';
   readonly icon: string = 'https://i.imgur.com/4UYI8Vy.png';
   readonly nickname: string = '메이플 봇';
+  readonly defaultMute: boolean = false;
   #client: SocketClient;
   #userLoader = new MapleUserLoader();
   #eventLoader = new MapleEventLoader();

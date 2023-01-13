@@ -96,7 +96,12 @@ export class WebsocketClient implements SocketClient {
       commandType: 'bot-login',
       resource: {
         bots: bots.map((bot) => {
-          return { hash: bot.hash, icon: bot.icon, nickname: bot.nickname };
+          return {
+            hash: bot.hash,
+            icon: bot.icon,
+            nickname: bot.nickname,
+            defaultMute: bot.defaultMute,
+          };
         }),
       },
     });

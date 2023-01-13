@@ -4,6 +4,8 @@ import { PengBot } from './src/bot/PengBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
 import { CoronaBot } from './src/bot/CoronaBot.ts';
 import { MaplestoryBot } from './src/bot/MaplestoryBot.ts';
+import { Bot } from './src/data/Bot.d.ts';
+import { NotificationTestBot } from './src/bot/NotificationTestBot.ts';
 
 const env = await config();
 
@@ -12,8 +14,9 @@ const pengBot = new PengBot(client);
 const diceBot = new DiceBot(client);
 const coronaBot = new CoronaBot(client);
 const mapleBot = new MaplestoryBot(client);
+const notiTestBot = new NotificationTestBot(client);
 
-const bots = [pengBot, diceBot, coronaBot, mapleBot];
+const bots: Bot[] = [pengBot, diceBot, coronaBot, mapleBot, notiTestBot];
 
 client.onConnected(() => {
   console.log('connected');
