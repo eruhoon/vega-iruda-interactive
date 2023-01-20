@@ -7,6 +7,7 @@ import { MaplestoryBot } from './src/bot/MaplestoryBot.ts';
 import { Bot } from './src/data/Bot.d.ts';
 import { NotificationTestBot } from './src/bot/NotificationTestBot.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
+import { LckBot } from './src/bot/LckBot.ts';
 
 const env = await config();
 
@@ -17,6 +18,7 @@ const coronaBot = new CoronaBot(client);
 const mapleBot = new MaplestoryBot(client);
 const notiTestBot = new NotificationTestBot(client);
 const clockBot = new ClockBot(client);
+const lckBot = new LckBot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -25,17 +27,13 @@ const bots: Bot[] = [
   mapleBot,
   notiTestBot,
   clockBot,
+  lckBot,
 ];
 
 clockBot.activate();
 
 client.onConnected(() => {
   console.log('connected');
-  // const bot = {
-  //   icon: 'https://i.imgur.com/ID0sKjB.jpg',
-  //   nickname: '펭 봇',
-  // };
-  // client.sendChat(bot, '%애 펭 봇 깜짝 등장');
 });
 
 client.onMessage((msg) => {
