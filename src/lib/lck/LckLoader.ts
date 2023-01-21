@@ -5,7 +5,8 @@ export class LckLoader {
     const url =
       'https://game.naver.com/esports/League_of_Legends/live/lck_2023_spring';
 const browser = await puppeteer.launch({
-  executablePath: '/usr/bin/chromium-browser'
+  executablePath: '/usr/bin/chromium-browser',
+args: ['--no-sandbox', '--disable-setuid-sandbox'],
 })
    // const browser = await puppeteer.launch({
       // headless: false,
