@@ -4,11 +4,13 @@ export class LckLoader {
   async load(): Promise<string | null> {
     const url =
       'https://game.naver.com/esports/League_of_Legends/live/lck_2023_spring';
-
-    const browser = await puppeteer.launch({
+const browser = await puppeteer.launch({
+  executablePath: '/usr/bin/chromium-browser'
+})
+   // const browser = await puppeteer.launch({
       // headless: false,
       // devtools: true,
-    });
+ //   });
     const page = await browser.newPage();
 
     await page.goto(url);
