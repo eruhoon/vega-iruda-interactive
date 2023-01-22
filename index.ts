@@ -27,7 +27,7 @@ const bots: Bot[] = [
   mapleBot,
   notiTestBot,
   clockBot,
-  lckBot,
+  //lckBot,
 ];
 
 clockBot.activate();
