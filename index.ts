@@ -18,7 +18,7 @@ const coronaBot = new CoronaBot(client);
 const mapleBot = new MaplestoryBot(client);
 const notiTestBot = new NotificationTestBot(client);
 const clockBot = new ClockBot(client);
-const lckBot = new LckBot(client);
+//const lckBot = new LckBot(client);
 
 const bots: Bot[] = [
   pengBot,
