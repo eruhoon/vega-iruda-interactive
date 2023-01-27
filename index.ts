@@ -7,7 +7,7 @@ import { MaplestoryBot } from './src/bot/MaplestoryBot.ts';
 import { Bot } from './src/data/Bot.d.ts';
 import { NotificationTestBot } from './src/bot/NotificationTestBot.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
-import { LckBot } from './src/bot/LckBot.ts';
+import { LolGallBot } from './src/bot/LolGallBot.ts';
 
 const env = await config();
 
@@ -18,7 +18,7 @@ const coronaBot = new CoronaBot(client);
 const mapleBot = new MaplestoryBot(client);
 const notiTestBot = new NotificationTestBot(client);
 const clockBot = new ClockBot(client);
-//const lckBot = new LckBot(client);
+const lolGallBot = new LolGallBot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -27,10 +27,11 @@ const bots: Bot[] = [
   mapleBot,
   notiTestBot,
   clockBot,
-  //lckBot,
+  lolGallBot,
 ];
 
 clockBot.activate();
+lolGallBot.activate();
 
 client.onConnected(() => {
   console.log('connected');
