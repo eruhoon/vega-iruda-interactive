@@ -38,7 +38,6 @@ client.onConnected(() => {
 });
 
 client.onMessage((msg) => {
-  console.log(msg);
   bots.forEach((bot) => bot.onMessage(msg));
 });
 
