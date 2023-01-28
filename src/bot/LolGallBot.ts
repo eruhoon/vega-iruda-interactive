@@ -5,7 +5,7 @@ import {
   SocketReceivedMessage,
 } from '../network/SocketClient.d.ts';
 
-const MAX_LENGTH = 10;
+const MAX_LENGTH = 100;
 
 export class LolGallBot implements Bot {
   readonly hash: string = 'lol-gall-bot';
