@@ -1,5 +1,4 @@
 import { WebsocketClient } from './src/network/WebsocketClient.ts';
-import { config } from 'https://deno.land/std@0.131.0/dotenv/mod.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
 import { CoronaBot } from './src/bot/CoronaBot.ts';
@@ -12,10 +11,9 @@ import { LolInvenNewsBot } from './src/bot/LolInvenNewsBot.ts';
 import { WeatherBot } from './src/bot/WeatherBot.ts';
 import { NamuWikiBot } from './src/bot/NamuWikiBot.ts';
 import { OnnadaBot } from './src/bot/OnnadaBot.ts';
+import { Config } from './src/common/Config.ts';
 
-const env = await config();
-
-const client = new WebsocketClient(env.WEB_SOCKET_HOST);
+const client = new WebsocketClient(Config.websocketHost);
 const pengBot = new PengBot(client);
 const diceBot = new DiceBot(client);
 const coronaBot = new CoronaBot(client);

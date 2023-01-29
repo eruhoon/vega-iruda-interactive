@@ -4,6 +4,7 @@ import {
   SocketSenderProfile,
 } from '../network/SocketClient.d.ts';
 import { Bot } from '../data/Bot.d.ts';
+import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
 
 export class PengBot implements Bot {
   readonly hash = 'peng-bot2';
@@ -110,6 +111,29 @@ export class PengBot implements Bot {
           this.hash,
           `https://www.google.co.kr/search?q=${word}`
         );
+      }
+
+      if (value.value.text.startsWith('@영화 ')) {
+        const match = /@영화 (.*)/.exec(value.value.text);
+        const keyword = match ? match[1] : '';
+
+        new NaverMovieLoader().getData(keyword).then((movie) => {
+          if (movie === null) {
+            this.#client.sendChat(this.hash, '영화 없음');
+          } else {
+            this.#client.sendGeneralPurposeCard(
+              this.hash,
+              JSON.stringify({
+                link: movie.link,
+                title: movie.title,
+                icon: movie.image,
+                subtitle: movie.pubDate,
+                orientation: 'vertical',
+                showType: 'new-window',
+              })
+            );
+          }
+        });
       }
     }
 
