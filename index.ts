@@ -9,6 +9,7 @@ import { NotificationTestBot } from './src/bot/NotificationTestBot.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
 import { LolGallBot } from './src/bot/LolGallBot.ts';
 import { LolInvenNewsBot } from './src/bot/LolInvenNewsBot.ts';
+import { WeatherBot } from './src/bot/WeatherBot.ts';
 
 const env = await config();
 
@@ -21,6 +22,7 @@ const notiTestBot = new NotificationTestBot(client);
 const clockBot = new ClockBot(client);
 const lolGallBot = new LolGallBot(client);
 const lolInvenNewsBot = new LolInvenNewsBot(client);
+const weatherBot = new WeatherBot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -31,6 +33,7 @@ const bots: Bot[] = [
   clockBot,
   lolGallBot,
   lolInvenNewsBot,
+  weatherBot,
 ];
 
 clockBot.activate();
