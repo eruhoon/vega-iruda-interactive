@@ -15,7 +15,6 @@ export class LolGallBot implements Bot {
   readonly defaultMute: boolean = true;
   #issues: string[] = [];
   readonly #client: SocketClient;
-  #timer: number | null = null;
   readonly #loader = new LolGallLoader();
   readonly #scheduler = new Scheduler(() => this.#onTick(), 60000);
 
