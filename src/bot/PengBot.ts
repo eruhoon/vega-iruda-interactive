@@ -5,6 +5,7 @@ import {
 } from '../network/SocketClient.d.ts';
 import { Bot } from '../data/Bot.d.ts';
 import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
+import { AfreecaSearchLoader } from '../lib/afreeca/AfreecaSearchLoader.ts';
 
 export class PengBot implements Bot {
   readonly hash = 'peng-bot2';
@@ -135,11 +136,35 @@ export class PengBot implements Bot {
           }
         });
       }
-    }
 
-    //  else if (value.type === 'image') {
-    //   this.#client.sendChat(bot, '이미지도 반응해볼까...싶은 펭봇입니다.');
-    // }
+      if (value.value.text.startsWith('@아프리카 ')) {
+        const match = /@아프리카 (.*)/.exec(value.value.text);
+        const query = match ? match[1] : '';
+        console.log('query');
+        new AfreecaSearchLoader().getResults(query).then((results) => {
+          const options = results.map((result) => {
+            const link = `//play.afreecatv.com/${result.id}/embed`;
+            return {
+              icon: result.broadIcon,
+              link,
+              title: result.stationName,
+              subtitle: result.broadTitle,
+              orientation: 'horizontal',
+              showType: 'content-viewer',
+            };
+          });
+
+          options
+            .filter((_, i) => i < 3)
+            .forEach((option) => {
+              this.#client.sendGeneralPurposeCard(
+                this.hash,
+                JSON.stringify(option)
+              );
+            });
+        });
+      }
+    }
 
     if (!this.#numberChanged) {
       this.#number = 0;
