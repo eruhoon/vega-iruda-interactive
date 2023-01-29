@@ -8,6 +8,7 @@ import { Bot } from './src/data/Bot.d.ts';
 import { NotificationTestBot } from './src/bot/NotificationTestBot.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
 import { LolGallBot } from './src/bot/LolGallBot.ts';
+import { LolInvenNewsBot } from './src/bot/LolInvenNewsBot.ts';
 
 const env = await config();
 
@@ -19,6 +20,7 @@ const mapleBot = new MaplestoryBot(client);
 const notiTestBot = new NotificationTestBot(client);
 const clockBot = new ClockBot(client);
 const lolGallBot = new LolGallBot(client);
+const lolInvenNewsBot = new LolInvenNewsBot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -28,10 +30,12 @@ const bots: Bot[] = [
   notiTestBot,
   clockBot,
   lolGallBot,
+  lolInvenNewsBot,
 ];
 
 clockBot.activate();
 lolGallBot.activate();
+lolInvenNewsBot.activate();
 
 client.onConnected(() => {
   console.log('connected');
