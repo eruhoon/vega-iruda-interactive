@@ -6,6 +6,9 @@ import {
 import { Bot } from '../data/Bot.d.ts';
 import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
 import { AfreecaSearchLoader } from '../lib/afreeca/AfreecaSearchLoader.ts';
+import { LolScheduleLoader } from '../lib/lol/LolScheduleLoader.ts';
+
+const LOL_SCHEDULE_URL = 'https://lolesports.com/schedule?leagues=lck,worlds';
 
 export class PengBot implements Bot {
   readonly hash = 'peng-bot2';
@@ -137,6 +140,34 @@ export class PengBot implements Bot {
         });
       }
 
+      if (value.value.text === '@lck') {
+        this.#load().then((found) => {
+          if (!found || found.schedules.length === 0) {
+            this.#client.sendChat(this.hash, LOL_SCHEDULE_URL);
+          }
+          found.schedules
+            .map((s) => {
+              const league = s[0];
+              const home = s[1];
+              const away = s[2];
+              return {
+                icon: this.#getIcon(league),
+                title: this.#getName(league),
+                subtitle: `${home} vs ${away}`,
+                orientation: 'horizontal',
+                showType: 'in-app-browser',
+                link: LOL_SCHEDULE_URL,
+              };
+            })
+            .forEach((opt) => {
+              this.#client.sendGeneralPurposeCard(
+                this.hash,
+                JSON.stringify(opt)
+              );
+            });
+        });
+      }
+
       if (value.value.text.startsWith('@아프리카 ')) {
         const match = /@아프리카 (.*)/.exec(value.value.text);
         const query = match ? match[1] : '';
@@ -171,4 +202,76 @@ export class PengBot implements Bot {
     }
     this.#numberChanged = false;
   }
+
+  async #load(): Promise<Schedule> {
+    const loaded = await new LolScheduleLoader().load();
+    const today = this.#formatDate(new Date());
+    const schedules: [League, string, string][] = loaded
+      .filter((e) => {
+        const isLck =
+          e.league.slug === 'lck' || 'lck_challengers_league' || 'worlds';
+        const isToday = today === this.#formatDate(new Date(e.startTime));
+        return isLck && isToday;
+      })
+      .map((e) => {
+        const league = this.#getLeagueName(e.league.slug);
+        const teams = e.match.teams.map((t) => t.code);
+        return [league, teams[0], teams[1]];
+      });
+    return { date: today, schedules };
+  }
+
+  #getLeagueName(slug: string) {
+    switch (slug) {
+      case 'lck':
+      case 'worlds':
+      case 'lck cl':
+        return slug;
+      default:
+        return 'etc';
+    }
+  }
+
+  #formatDate(dateObj: Date): string {
+    const format = (src: number) => (src < 10 ? `0${src}` : `${src}`);
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1;
+    const date = dateObj.getDate();
+    return `${year}-${format(month)}-${format(date)}`;
+  }
+
+  #getIcon(league: League): string {
+    switch (league) {
+      case 'lck':
+        return 'https://am-a.akamaihd.net/image?resize=60:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2Flck-color-on-black.png';
+      case 'lck cl':
+        return 'https://am-a.akamaihd.net/image?resize=120:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2Flck-cl-white.png';
+      case 'worlds':
+        return 'https://am-a.akamaihd.net/image?resize=60:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2F1592594612171_WorldsDarkBG.png';
+      default:
+        console.log('invalid league');
+        return '';
+    }
+  }
+
+  #getName(league: League): string {
+    switch (league) {
+      case 'lck':
+        return 'LCK';
+      case 'lck cl':
+        return 'LCK CL';
+      case 'worlds':
+        return 'Worlds';
+      default:
+        console.log('invalid league');
+        return '';
+    }
+  }
 }
+
+type Schedule = {
+  date: string;
+  schedules: [League, string, string][];
+};
+
+type League = 'lck' | 'lck cl' | 'worlds' | 'etc';
