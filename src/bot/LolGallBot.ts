@@ -1,3 +1,4 @@
+import { Scheduler } from '../../common/schedule/Scheduler.ts';
 import { Bot } from '../data/Bot.d.ts';
 import { LolGallLoader } from '../lib/dcinside/LolGallLoader.ts';
 import {
@@ -16,6 +17,7 @@ export class LolGallBot implements Bot {
   readonly #client: SocketClient;
   #timer: number | null = null;
   readonly #loader = new LolGallLoader();
+  readonly #scheduler = new Scheduler(() => this.#onTick(), 60000);
 
   constructor(client: SocketClient) {
     this.#client = client;
@@ -24,7 +26,7 @@ export class LolGallBot implements Bot {
   onMessage(msg: SocketReceivedMessage): void {}
 
   activate() {
-    this.#resetTimer();
+    this.#scheduler.start();
   }
 
   #onTick() {
@@ -47,12 +49,5 @@ export class LolGallBot implements Bot {
         this.#client.sendChat(this.hash, link);
       }
     });
-  }
-
-  #resetTimer() {
-    if (this.#timer) {
-      clearInterval(this.#timer);
-    }
-    this.#timer = setInterval(() => this.#onTick(), 60000);
   }
 }
