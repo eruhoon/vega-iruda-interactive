@@ -10,6 +10,7 @@ import { ClockBot } from './src/bot/ClockBot.ts';
 import { LolGallBot } from './src/bot/LolGallBot.ts';
 import { LolInvenNewsBot } from './src/bot/LolInvenNewsBot.ts';
 import { WeatherBot } from './src/bot/WeatherBot.ts';
+import { NamuWikiBot } from './src/bot/NamuWikiBot.ts';
 
 const env = await config();
 
@@ -23,7 +24,7 @@ const clockBot = new ClockBot(client);
 const lolGallBot = new LolGallBot(client);
 const lolInvenNewsBot = new LolInvenNewsBot(client);
 const weatherBot = new WeatherBot(client);
-
+const namuWikiBot = new NamuWikiBot(client);
 const bots: Bot[] = [
   pengBot,
   diceBot,
@@ -34,6 +35,7 @@ const bots: Bot[] = [
   lolGallBot,
   lolInvenNewsBot,
   weatherBot,
+  namuWikiBot,
 ];
 
 clockBot.activate();
