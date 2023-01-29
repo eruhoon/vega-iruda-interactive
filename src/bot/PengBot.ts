@@ -99,6 +99,18 @@ export class PengBot implements Bot {
       if (value.value.text === '간삐') {
         this.#client.sendChat(this.hash, '...');
       }
+
+      if (value.value.text.startsWith('@검색 ')) {
+        const match = /@검색 (.*)/.exec(value.value.text);
+        const patt = /([+`~!@#$%^&*|\\\'\";:\/?])/gi;
+        const word = match
+          ? match[1].replace(patt, (s) => encodeURIComponent(s))
+          : '';
+        this.#client.sendChat(
+          this.hash,
+          `https://www.google.co.kr/search?q=${word}`
+        );
+      }
     }
 
     //  else if (value.type === 'image') {
