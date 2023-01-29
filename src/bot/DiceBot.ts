@@ -26,7 +26,24 @@ export class DiceBot implements Bot {
       if (value.value.text === '@주사위') {
         const rand = Math.ceil(Math.random() * 6);
         this.#client.sendChat(this.hash, rand.toString());
+      } else if (value.value.text.startsWith('@랜덤 ')) {
+        const maxNumber = this.#parseMaxNumber(value.value.text);
+        const generated = this.#generateNumber(maxNumber);
+        this.#client.sendChat(this.hash, generated.toString());
       }
     }
+  }
+
+  #parseMaxNumber(src: string): number {
+    const match = /@랜덤 (.*)/.exec(src);
+    const maxNumber = match ? parseInt(match[1]) : NaN;
+    return maxNumber;
+  }
+
+  #generateNumber(max: number): number {
+    if (isNaN(max) || max > 31415 || max < 2) {
+      return -1;
+    }
+    return Math.floor(Math.random() * max) + 1;
   }
 }
