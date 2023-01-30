@@ -8,6 +8,9 @@ import { Bot } from '../data/Bot.d.ts';
 import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
 import { AfreecaSearchLoader } from '../lib/afreeca/AfreecaSearchLoader.ts';
 import { LolScheduleLoader } from '../lib/lol/LolScheduleLoader.ts';
+import { TwitchTokenLoader } from '../lib/twitch/TwitchTokenLoader.ts';
+import { Config } from '../common/Config.ts';
+import { TwitchUserLoader } from '../lib/twitch/TwitchUserLoader.ts';
 
 const LOL_SCHEDULE_URL = 'https://lolesports.com/schedule?leagues=lck,worlds';
 
@@ -174,6 +177,17 @@ export class PengBot implements Bot {
         this.#onPoke(text);
       }
 
+      if (value.value.text.startsWith('@트위치 ')) {
+        const text = value.value.text;
+        const match = /@트위치 (.*)/.exec(text);
+        const word = match?.[1];
+        if (!word) {
+          this.#client.sendChat(this.hash, '입력 오류');
+          return;
+        }
+        this.#onTwitch(word);
+      }
+
       if (value.value.text.startsWith('@아프리카 ')) {
         const match = /@아프리카 (.*)/.exec(value.value.text);
         const query = match ? match[1] : '';
@@ -207,6 +221,42 @@ export class PengBot implements Bot {
       this.#number = 0;
     }
     this.#numberChanged = false;
+  }
+
+  #tokenLoader = new TwitchTokenLoader(
+    Config.twitchClientId,
+    Config.twitchSecretKey
+  );
+
+  #userLoader = new TwitchUserLoader(Config.twitchClientId);
+
+  async #onTwitch(userId: string) {
+    const token = await this.#tokenLoader.load();
+    if (!token) {
+      this.#client.sendChat(this.hash, '토큰 오류');
+      return;
+    }
+    const users = await this.#userLoader.load([userId], token);
+    const user = users?.[0];
+
+    if (!user) {
+      this.#client.sendChat(this.hash, '유저 없음');
+      return;
+    }
+
+    const host = 'player.twitch.tv';
+    const embedHost = Config.twitchEmbedHost;
+    this.#client.sendGeneralPurposeCard(
+      this.hash,
+      JSON.stringify({
+        link: `https://${host}/?channel=${user.login}&parent=${embedHost}`,
+        title: user.display_name,
+        icon: user.profile_image_url,
+        subtitle: user.description,
+        showType: 'content-viewer',
+        orientation: 'horizontal',
+      })
+    );
   }
 
   async #onPoke(text: string) {
