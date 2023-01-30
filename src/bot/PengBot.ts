@@ -1,3 +1,4 @@
+import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
@@ -168,6 +169,11 @@ export class PengBot implements Bot {
         });
       }
 
+      if (value.value.text.startsWith('@벌레 ')) {
+        const text = value.value.text;
+        this.#onPoke(text);
+      }
+
       if (value.value.text.startsWith('@아프리카 ')) {
         const match = /@아프리카 (.*)/.exec(value.value.text);
         const query = match ? match[1] : '';
@@ -201,6 +207,43 @@ export class PengBot implements Bot {
       this.#number = 0;
     }
     this.#numberChanged = false;
+  }
+
+  async #onPoke(text: string) {
+    const res = await fetch(
+      'https://pokemon.fandom.com/ko/wiki/%EC%A0%84%EA%B5%AD%EB%8F%84%EA%B0%90'
+    );
+    const data = await res.text();
+
+    if (!data) {
+      this.#client.sendChat(this.hash, '파싱 에러');
+      return;
+    }
+
+    const match = /@벌레 (.*)/.exec(text);
+    const word = match?.[1];
+
+    if (!word) {
+      this.#client.sendChat(
+        this.hash,
+        decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감')
+      );
+      return;
+    }
+
+    const $ = cheerio.load(data);
+    const idx = isNaN(parseInt(word)) ? 3 : 1;
+    const href = $(`td:contains('${word}')`)
+      .filter((i) => $(`td:contains('${word}')`).eq(i).index() == idx)
+      .parent()
+      .find('td:eq(3) a')
+      .attr('href');
+    this.#client.sendChat(
+      this.hash,
+      href
+        ? decodeURI(`https://pokemon.fandom.com${href}`)
+        : decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감')
+    );
   }
 
   async #load(): Promise<Schedule> {
