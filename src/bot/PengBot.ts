@@ -109,6 +109,16 @@ export class PengBot implements Bot {
         this.#client.sendChat(this.hash, '...');
       }
 
+      if (
+        value.value.text.startsWith('@백준') ||
+        value.value.text.startsWith('@문제') ||
+        value.value.text.startsWith('@코딩')
+      ) {
+        const match = /@.*? (.*)/.exec(value.value.text);
+        const word = match?.[1];
+        this.#client.sendChat(this.hash, `http://boj.kr/${word}`);
+      }
+
       if (value.value.text.startsWith('@검색 ')) {
         const match = /@검색 (.*)/.exec(value.value.text);
         const patt = /([+`~!@#$%^&*|\\\'\";:\/?])/gi;
