@@ -11,6 +11,7 @@ import { LolScheduleLoader } from '../lib/lol/LolScheduleLoader.ts';
 import { TwitchTokenLoader } from '../lib/twitch/TwitchTokenLoader.ts';
 import { Config } from '../common/Config.ts';
 import { TwitchUserLoader } from '../lib/twitch/TwitchUserLoader.ts';
+import { NaverBookLoader } from '../lib/naver/NaverBookLoader.ts';
 
 const LOL_SCHEDULE_URL = 'https://lolesports.com/schedule?leagues=lck,worlds';
 
@@ -129,6 +130,28 @@ export class PengBot implements Bot {
           this.hash,
           `https://www.google.co.kr/search?q=${word}`
         );
+      }
+
+      if (value.value.text.startsWith('@책 ')) {
+        const match = /@책 (.*)/.exec(value.value.text);
+        const keyword = match ? match[1] : '';
+        new NaverBookLoader().getData(keyword).then((book) => {
+          if (!book) {
+            this.#client.sendChat(this.hash, '책 없음');
+          } else {
+            this.#client.sendGeneralPurposeCard(
+              this.hash,
+              JSON.stringify({
+                link: book.link,
+                title: book.title,
+                icon: book.image,
+                subtitle: book.author,
+                orientation: 'vertical',
+                showType: 'new-window',
+              })
+            );
+          }
+        });
       }
 
       if (value.value.text.startsWith('@영화 ')) {
