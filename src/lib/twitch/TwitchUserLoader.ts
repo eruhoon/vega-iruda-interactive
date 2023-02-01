@@ -19,8 +19,6 @@ export class TwitchUserLoader {
         },
       });
       const data = await res.json();
-      console.log(111);
-      console.log(data);
       const users: TwitchUserDto[] = data.data;
       return users;
     } catch (e) {

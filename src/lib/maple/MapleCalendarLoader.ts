@@ -8,7 +8,6 @@ export class MapleCalendarLoader {
       referrer: 'm.maplestory.nexon.com',
     });
     const body = await res.text();
-    console.log(body);
     const $ = cheerio.load(body, {
       lowerCaseTags: true,
       lowerCaseAttributeNames: true,

@@ -47,7 +47,6 @@ export class WebsocketClient implements SocketClient {
     this.#client.on('message', (msg) => {
       const raw: string = msg.data || '';
       const json = JSON.parse(raw);
-      console.log(json);
 
       const value = json.response?.msg?.response2;
       if (!value) {
