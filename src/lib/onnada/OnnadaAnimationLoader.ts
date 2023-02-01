@@ -1,6 +1,14 @@
 export class OnnadaAnimationLoader {
   async load(input: string): Promise<AnimationLoaderResult | null> {
-    const uri = OnnadaAnimationLoader.getUri(input);
+    for (let i=1; i<=3; i++) {
+      let result = search(input, i);
+      if (!result) return result;
+    }
+    return null;
+  }
+  
+  async search(input: string, idx: number): Promise<AnimationLoaderResult | null> {
+    const uri = OnnadaAnimationLoader.getUri(input, idx);
     const res = await fetch(uri, {});
     if (res.status !== 200) {
       return null;
@@ -38,11 +46,11 @@ export class OnnadaAnimationLoader {
     return result;
   }
 
-  static getUri(animationName: string): string {
+  static getUri(animationName: string, idx: number): string {
     const params = new URLSearchParams();
     params.set('q', animationName);
-    const host = 'https://onnada.com/anime/search';
-    return `${host}?${params.toString()}`;
+    const host = ['https://onnada.com/anime/search', 'https://onnada.com/anime/wait', 'https://onnada.com/anime/decide'];
+    return `${host[idx-1]}?${params.toString()}`;
   }
 }
 
