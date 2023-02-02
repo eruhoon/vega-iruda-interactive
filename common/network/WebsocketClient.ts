@@ -26,6 +26,7 @@ export class WebsocketClient implements SocketClient {
   onConnected(callback: OnConnectedCallback): void {
     this.#onConnectedCb = callback;
   }
+
   onDisconnected(callback: OnDisconnectedCallback): void {
     this.#onDisconnectedCb = callback;
   }
@@ -39,7 +40,6 @@ export class WebsocketClient implements SocketClient {
 
     this.#client.on('open', () => {
       this.#sendLogin(bots);
-      //this.#client?.send(JSON.stringify({ commandType: 'bot-login' }));
 
       this.#onConnectedCb();
     });
