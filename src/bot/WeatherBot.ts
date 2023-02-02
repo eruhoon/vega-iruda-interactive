@@ -1,9 +1,9 @@
-import { Bot } from '../data/Bot.d.ts';
-import { CityWeatherLoader } from '../lib/weather/CityWeatherLoader.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
+} from '../../common/network/SocketClient.d.ts';
+import { CityWeatherLoader } from '../lib/weather/CityWeatherLoader.ts';
 
 const TYPHOON_LINK =
   'https://earth.nullschool.net/ko/#current/wind/surface/level/overlay=total_cloud_water/orthographic=-228.58,29.11,1089';

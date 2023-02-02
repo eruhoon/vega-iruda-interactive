@@ -1,9 +1,9 @@
-import { Bot } from '../data/Bot.d.ts';
+import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
-import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
+} from '../../common/network/SocketClient.d.ts';
 
 export class CoronaBot implements Bot {
   readonly hash: string = 'corona-bot';

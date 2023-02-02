@@ -1,8 +1,8 @@
-import { Bot } from '../data/Bot.d.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
+} from '../../common/network/SocketClient.d.ts';
 
 export class NamuWikiBot implements Bot {
   readonly hash: string = 'namuwiki-bot';

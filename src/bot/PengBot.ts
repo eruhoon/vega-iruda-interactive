@@ -1,17 +1,17 @@
 import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
+import { Config } from '../../common/config/Config.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
   SocketSenderProfile,
-} from '../network/SocketClient.d.ts';
-import { Bot } from '../data/Bot.d.ts';
-import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
+} from '../../common/network/SocketClient.d.ts';
 import { AfreecaSearchLoader } from '../lib/afreeca/AfreecaSearchLoader.ts';
 import { LolScheduleLoader } from '../lib/lol/LolScheduleLoader.ts';
-import { TwitchTokenLoader } from '../lib/twitch/TwitchTokenLoader.ts';
-import { Config } from '../common/Config.ts';
-import { TwitchUserLoader } from '../lib/twitch/TwitchUserLoader.ts';
 import { NaverBookLoader } from '../lib/naver/NaverBookLoader.ts';
+import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
+import { TwitchTokenLoader } from '../lib/twitch/TwitchTokenLoader.ts';
+import { TwitchUserLoader } from '../lib/twitch/TwitchUserLoader.ts';
 
 const LOL_SCHEDULE_URL = 'https://lolesports.com/schedule?leagues=lck,worlds';
 

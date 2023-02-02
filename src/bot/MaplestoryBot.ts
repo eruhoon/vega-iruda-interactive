@@ -1,11 +1,11 @@
-import { Bot } from '../data/Bot.d.ts';
-import { MapleCalendarLoader } from '../lib/maple/MapleCalendarLoader.ts';
-import { MapleEventLoader } from '../lib/maple/MapleEventLoader.ts';
-import { MapleUserLoader } from '../lib/maple/MapleUserLoader.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
+} from '../../common/network/SocketClient.d.ts';
+import { MapleCalendarLoader } from '../lib/maple/MapleCalendarLoader.ts';
+import { MapleEventLoader } from '../lib/maple/MapleEventLoader.ts';
+import { MapleUserLoader } from '../lib/maple/MapleUserLoader.ts';
 
 export class MaplestoryBot implements Bot {
   readonly hash: string = 'maple-bot';

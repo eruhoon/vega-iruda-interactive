@@ -1,9 +1,9 @@
-import { Bot } from '../data/Bot.d.ts';
-import { OnnadaAnimationLoader } from '../lib/onnada/OnnadaAnimationLoader.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
+} from '../../common/network/SocketClient.d.ts';
+import { OnnadaAnimationLoader } from '../lib/onnada/OnnadaAnimationLoader.ts';
 
 export class OnnadaBot implements Bot {
   readonly hash: string = 'onnada-bot';

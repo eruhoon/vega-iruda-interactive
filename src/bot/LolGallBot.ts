@@ -1,10 +1,10 @@
-import { Scheduler } from '../../common/schedule/Scheduler.ts';
-import { Bot } from '../data/Bot.d.ts';
-import { LolGallLoader } from '../lib/dcinside/LolGallLoader.ts';
+import { Bot } from '../../common/data/Bot.d.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../network/SocketClient.d.ts';
+} from '../../common/network/SocketClient.d.ts';
+import { Scheduler } from '../../common/schedule/Scheduler.ts';
+import { LolGallLoader } from '../lib/dcinside/LolGallLoader.ts';
 
 const MAX_LENGTH = 100;
 
