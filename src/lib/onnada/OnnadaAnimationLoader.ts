@@ -1,7 +1,7 @@
 export class OnnadaAnimationLoader {
   async load(input: string): Promise<AnimationLoaderResult | null> {
     for (let i=1; i<=3; i++) {
-      let result = search(input, i);
+      let result = await this.search(input, i);
       if (result) return result;
     }
     return null;
