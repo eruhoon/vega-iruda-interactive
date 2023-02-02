@@ -1,4 +1,4 @@
-import { Config } from '../../common/Config.ts';
+import { Config } from '../../../common/config/Config.ts';
 
 export class NaverMovieLoader {
   static readonly #CLIENT_ID = Config.naverClientId;
