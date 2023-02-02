@@ -18,6 +18,8 @@ export class OnnadaBot implements Bot {
     this.#client = client;
   }
 
+  activate(): void {}
+
   onMessage(msg: SocketReceivedMessage): void {
     const { value } = msg;
     const { type } = value;

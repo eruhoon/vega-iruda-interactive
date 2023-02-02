@@ -15,6 +15,9 @@ export class NamuWikiBot implements Bot {
   constructor(client: SocketClient) {
     this.#client = client;
   }
+
+  activate(): void {}
+
   onMessage(msg: SocketReceivedMessage): void {
     const { value } = msg;
     const { type } = value;

@@ -7,4 +7,5 @@ export interface Bot {
   readonly defaultMute: boolean;
 
   onMessage(msg: SocketReceivedMessage): void;
+  activate(): void;
 }

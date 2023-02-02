@@ -11,6 +11,7 @@ import { OnnadaBot } from './src/bot/OnnadaBot.ts';
 import { WebsocketClient } from './common/network/WebsocketClient.ts';
 import { Config } from './common/config/Config.ts';
 import { Bot } from './common/data/Bot.d.ts';
+import { IrudaApp } from './common/IrudaApp.ts';
 
 const client = new WebsocketClient(Config.websocketHost);
 const pengBot = new PengBot(client);
@@ -37,20 +38,4 @@ const bots: Bot[] = [
   onnadaBot,
 ];
 
-clockBot.activate();
-lolGallBot.activate();
-lolInvenNewsBot.activate();
-
-client.onConnected(() => {
-  console.log('connected');
-});
-
-client.onMessage((msg) => {
-  bots.forEach((bot) => bot.onMessage(msg));
-});
-
-client.onDisconnected(() => {
-  console.log('disconnected');
-});
-
-client.connect(bots);
+new IrudaApp().run(client, bots);

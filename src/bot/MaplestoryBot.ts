@@ -21,6 +21,8 @@ export class MaplestoryBot implements Bot {
     this.#client = client;
   }
 
+  activate(): void {}
+
   onMessage(msg: SocketReceivedMessage) {
     if (msg?.value?.type === 'chat') {
       const text = msg?.value.value?.text;

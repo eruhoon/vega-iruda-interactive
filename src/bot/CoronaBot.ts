@@ -16,6 +16,8 @@ export class CoronaBot implements Bot {
     this.#client = client;
   }
 
+  activate(): void {}
+
   onMessage(msg: SocketReceivedMessage) {
     const value = msg.value;
     if (value.type === 'chat') {

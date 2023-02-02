@@ -29,6 +29,8 @@ export class PengBot implements Bot {
     this.#client = client;
   }
 
+  activate(): void {}
+
   #asSender(): SocketSenderProfile {
     return { icon: this.icon, nickname: this.nickname };
   }
