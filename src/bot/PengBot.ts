@@ -353,7 +353,7 @@ export class PengBot implements Bot {
     switch (slug) {
       case 'lck':
       case 'worlds':
-      case 'lck cl':
+      case 'lck_challengers_league':
         return slug;
       default:
         return 'etc';
@@ -372,7 +372,7 @@ export class PengBot implements Bot {
     switch (league) {
       case 'lck':
         return 'https://am-a.akamaihd.net/image?resize=60:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2Flck-color-on-black.png';
-      case 'lck cl':
+      case 'lck_challengers_league':
         return 'https://am-a.akamaihd.net/image?resize=120:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2Flck-cl-white.png';
       case 'worlds':
         return 'https://am-a.akamaihd.net/image?resize=60:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2F1592594612171_WorldsDarkBG.png';
@@ -386,7 +386,7 @@ export class PengBot implements Bot {
     switch (league) {
       case 'lck':
         return 'LCK';
-      case 'lck cl':
+      case 'lck_challengers_league':
         return 'LCK CL';
       case 'worlds':
         return 'Worlds';
@@ -402,4 +402,4 @@ type Schedule = {
   schedules: [League, string, string][];
 };
 
-type League = 'lck' | 'lck cl' | 'worlds' | 'etc';
+type League = 'lck' | 'lck_challengers_league' | 'worlds' | 'etc';
