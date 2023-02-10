@@ -1,9 +1,9 @@
 import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
-import { Bot } from '../../common/data/Bot.d.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
+} from '/framework/src/network/SocketClient.d.ts';
 
 export class CoronaBot implements Bot {
   readonly hash: string = 'corona-bot';
@@ -30,7 +30,7 @@ export class CoronaBot implements Bot {
               subtitle: it.date,
               icon: 'https://i.imgur.com/B9H3UYL.png',
               orientation: 'horizontal',
-            })
+            }),
           );
         });
       }

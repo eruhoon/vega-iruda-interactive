@@ -1,6 +1,4 @@
 import { Config } from './common/config/Config.ts';
-import { Bot } from './common/data/Bot.d.ts';
-import { IrudaApp } from './common/IrudaApp.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
 import { CoronaBot } from './src/bot/CoronaBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
@@ -11,6 +9,8 @@ import { NamuWikiBot } from './src/bot/NamuWikiBot.ts';
 import { OnnadaBot } from './src/bot/OnnadaBot.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { WeatherBot } from './src/bot/WeatherBot.ts';
+
+import { Bot, IrudaApp } from '/framework/mod.ts';
 
 const app = new IrudaApp(Config.websocketHost);
 const { client } = app;

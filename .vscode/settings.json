@@ -15,5 +15,6 @@
   "deno.inlayHints.parameterNames.suppressWhenArgumentMatchesName": false,
   "deno.inlayHints.functionLikeReturnTypes.enabled": false,
   "deno.inlayHints.enumMemberValues.enabled": false,
-  "deno.inlayHints.parameterNames.enabled": "none"
+  "deno.inlayHints.parameterNames.enabled": "none",
+  "deno.codeLens.test": true
 }

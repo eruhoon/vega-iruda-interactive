@@ -1,10 +1,10 @@
-import { Bot } from '../../common/data/Bot.d.ts';
+import { LolGallLoader } from '../lib/dcinside/LolGallLoader.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
-import { Scheduler } from '../../common/schedule/Scheduler.ts';
-import { LolGallLoader } from '../lib/dcinside/LolGallLoader.ts';
+} from '/framework/src/network/SocketClient.d.ts';
+import { Scheduler } from '/framework/src/util/schedule/Scheduler.ts';
 
 const MAX_LENGTH = 100;
 
@@ -22,7 +22,7 @@ export class LolGallBot implements Bot {
     this.#client = client;
   }
 
-  onMessage(msg: SocketReceivedMessage): void {}
+  onMessage(_: SocketReceivedMessage): void {}
 
   activate() {
     this.#scheduler.start();

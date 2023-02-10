@@ -1,8 +1,16 @@
 {
+  "imports": {
+    "/framework/": "https://eruhoon.github.io/vega-iruda-interactive-fw/"
+  },
   "fmt": {
     "options": {
       "indentWidth": 2,
       "singleQuote": true
+    }
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["import-prefix-missing"]
     }
   }
 }

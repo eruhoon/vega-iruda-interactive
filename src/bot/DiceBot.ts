@@ -1,9 +1,9 @@
-import { Bot } from '../../common/data/Bot.d.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
   SocketSenderProfile,
-} from '../../common/network/SocketClient.d.ts';
+} from '/framework/src/network/SocketClient.d.ts';
 
 export class DiceBot implements Bot {
   readonly hash = 'dice-bot';

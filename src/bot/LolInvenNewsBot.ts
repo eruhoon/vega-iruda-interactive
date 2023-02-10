@@ -1,10 +1,11 @@
-import { Bot } from '../../common/data/Bot.d.ts';
+import { LolInvenNewsLoader } from '../lib/inven/LolInvenNewsLoader.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
-import { Scheduler } from '../../common/schedule/Scheduler.ts';
-import { LolInvenNewsLoader } from '../lib/inven/LolInvenNewsLoader.ts';
+} from '/framework/src/network/SocketClient.d.ts';
+import { Scheduler } from '/framework/src/util/schedule/Scheduler.ts';
+
 const MAX_LENGTH = 100;
 
 export class LolInvenNewsBot implements Bot {

@@ -1,9 +1,9 @@
-import { Bot } from '../../common/data/Bot.d.ts';
+import { OnnadaAnimationLoader } from '../lib/onnada/OnnadaAnimationLoader.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
-import { OnnadaAnimationLoader } from '../lib/onnada/OnnadaAnimationLoader.ts';
+} from '/framework/src/network/SocketClient.d.ts';
 
 export class OnnadaBot implements Bot {
   readonly hash: string = 'onnada-bot';
@@ -39,7 +39,7 @@ export class OnnadaBot implements Bot {
                 subtitle: `${animation.genre} / ${animation.media}`,
                 orientation: 'vertical',
                 showType: 'in-app-browser',
-              })
+              }),
             );
           } else {
             this.#client.sendChat(this.hash, '애니 없음');
@@ -50,7 +50,7 @@ export class OnnadaBot implements Bot {
         const word = match ? match[1] : '';
         this.#client.sendChat(
           this.hash,
-          `https://onnada.com/character/search?q=${word}`
+          `https://onnada.com/character/search?q=${word}`,
         );
       }
     }

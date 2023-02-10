@@ -7,7 +7,7 @@ export class NaverMovieLoader {
 
   static #findResult(
     items: NaverMovieItem[],
-    keyword: string
+    keyword: string,
   ): NaverMovieItem | null {
     const keywordize = (s: string) => s.replace(/[\s]+/g, '');
     const fullMatch = (item: NaverMovieItem) => {

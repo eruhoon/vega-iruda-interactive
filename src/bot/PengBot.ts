@@ -1,17 +1,17 @@
 import { cheerio } from 'https://deno.land/x/cheerio@1.0.7/mod.ts';
 import { Config } from '../../common/config/Config.ts';
-import { Bot } from '../../common/data/Bot.d.ts';
-import {
-  SocketClient,
-  SocketReceivedMessage,
-  SocketSenderProfile,
-} from '../../common/network/SocketClient.d.ts';
 import { AfreecaSearchLoader } from '../lib/afreeca/AfreecaSearchLoader.ts';
 import { LolScheduleLoader } from '../lib/lol/LolScheduleLoader.ts';
 import { NaverBookLoader } from '../lib/naver/NaverBookLoader.ts';
 import { NaverMovieLoader } from '../lib/naver/NaverMovieLoader.ts';
 import { TwitchTokenLoader } from '../lib/twitch/TwitchTokenLoader.ts';
 import { TwitchUserLoader } from '../lib/twitch/TwitchUserLoader.ts';
+import { Bot } from '/framework/mod.ts';
+import {
+  SocketClient,
+  SocketReceivedMessage,
+  SocketSenderProfile,
+} from '/framework/src/network/SocketClient.d.ts';
 
 const LOL_SCHEDULE_URL = 'https://lolesports.com/schedule?leagues=lck,worlds';
 
@@ -46,9 +46,10 @@ export class PengBot implements Bot {
           JSON.stringify({
             title: '우...마...',
             subtitle: '무스,,메.,,',
-            icon: 'https://data.onnada.com/anime/202012/thumb300x400_2070905244_8a48c2b8_0.png',
+            icon:
+              'https://data.onnada.com/anime/202012/thumb300x400_2070905244_8a48c2b8_0.png',
             orientation: 'vertical',
-          })
+          }),
         );
       }
       if (value.value.text === '1' && this.#number === 0) {
@@ -130,7 +131,7 @@ export class PengBot implements Bot {
           : '';
         this.#client.sendChat(
           this.hash,
-          `https://www.google.co.kr/search?q=${word}`
+          `https://www.google.co.kr/search?q=${word}`,
         );
       }
 
@@ -150,7 +151,7 @@ export class PengBot implements Bot {
                 subtitle: book.author,
                 orientation: 'vertical',
                 showType: 'new-window',
-              })
+              }),
             );
           }
         });
@@ -173,7 +174,7 @@ export class PengBot implements Bot {
                 subtitle: movie.pubDate,
                 orientation: 'vertical',
                 showType: 'new-window',
-              })
+              }),
             );
           }
         });
@@ -201,7 +202,7 @@ export class PengBot implements Bot {
             .forEach((opt) => {
               this.#client.sendGeneralPurposeCard(
                 this.hash,
-                JSON.stringify(opt)
+                JSON.stringify(opt),
               );
             });
         });
@@ -245,7 +246,7 @@ export class PengBot implements Bot {
             .forEach((option) => {
               this.#client.sendGeneralPurposeCard(
                 this.hash,
-                JSON.stringify(option)
+                JSON.stringify(option),
               );
             });
         });
@@ -260,7 +261,7 @@ export class PengBot implements Bot {
 
   #tokenLoader = new TwitchTokenLoader(
     Config.twitchClientId,
-    Config.twitchSecretKey
+    Config.twitchSecretKey,
   );
 
   #userLoader = new TwitchUserLoader(Config.twitchClientId);
@@ -290,13 +291,13 @@ export class PengBot implements Bot {
         subtitle: user.description,
         showType: 'content-viewer',
         orientation: 'horizontal',
-      })
+      }),
     );
   }
 
   async #onPoke(text: string) {
     const res = await fetch(
-      'https://pokemon.fandom.com/ko/wiki/%EC%A0%84%EA%B5%AD%EB%8F%84%EA%B0%90'
+      'https://pokemon.fandom.com/ko/wiki/%EC%A0%84%EA%B5%AD%EB%8F%84%EA%B0%90',
     );
     const data = await res.text();
 
@@ -311,7 +312,7 @@ export class PengBot implements Bot {
     if (!word) {
       this.#client.sendChat(
         this.hash,
-        decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감')
+        decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감'),
       );
       return;
     }
@@ -319,7 +320,7 @@ export class PengBot implements Bot {
     const $ = cheerio.load(data);
     const idx = isNaN(parseInt(word)) ? 3 : 1;
     const href = $(`td:contains('${word}')`)
-      .filter((i) => $(`td:contains('${word}')`).eq(i).index() == idx)
+      .filter((i: number) => $(`td:contains('${word}')`).eq(i).index() == idx)
       .parent()
       .find('td:eq(3) a')
       .attr('href');
@@ -327,7 +328,7 @@ export class PengBot implements Bot {
       this.hash,
       href
         ? decodeURI(`https://pokemon.fandom.com${href}`)
-        : decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감')
+        : decodeURI('https://pokemon.fandom.com/ko/wiki/전국도감'),
     );
   }
 
@@ -336,8 +337,8 @@ export class PengBot implements Bot {
     const today = this.#formatDate(new Date());
     const schedules: [League, string, string][] = loaded
       .filter((e) => {
-        const isLck =
-          e.league.slug === 'lck' || 'lck_challengers_league' || 'worlds';
+        const isLck = e.league.slug === 'lck' || 'lck_challengers_league' ||
+          'worlds';
         const isToday = today === this.#formatDate(new Date(e.startTime));
         return isLck && isToday;
       })

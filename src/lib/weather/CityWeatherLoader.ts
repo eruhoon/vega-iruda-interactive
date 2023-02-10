@@ -31,7 +31,7 @@ export class CityWeatherLoader {
 
   #getName(
     cityName: string,
-    cityCode: { code: number; city: string; detail?: string }
+    cityCode: { code: number; city: string; detail?: string },
   ): string {
     return cityCode.detail ? cityCode.detail : cityName;
   }
@@ -74,8 +74,8 @@ export class CityWeatherLoader {
 
     const $fisrtWeatherSpan = $target.find('span.wic');
 
-    const weatherAlt =
-      $fisrtWeatherSpan.text() || $fisrtWeatherSpan.attr('title');
+    const weatherAlt = $fisrtWeatherSpan.text() ||
+      $fisrtWeatherSpan.attr('title');
     const weather = weatherAlt ? weatherAlt : '';
 
     const imgHost = 'https://www.weather.go.kr/w/resources/icon/DY@64/A/Light/';
@@ -87,7 +87,7 @@ export class CityWeatherLoader {
 
   async #reqeustGet(
     uri: string,
-    query: string
+    query: string,
   ): Promise<{ data: string; status: number }> {
     const accept =
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
@@ -116,23 +116,24 @@ export class CityWeatherLoader {
       resultCodes.map(async (resultCode) => {
         const { data: data, status } = await this.#reqeustGet(
           'digital-forecast.do',
-          `code=${resultCode.code}&unit=m%2Fs&hr1=Y`
+          `code=${resultCode.code}&unit=m%2Fs&hr1=Y`,
         );
         if (!data || status !== 200) {
           return FAIL_RESULT;
         }
 
-        const { data: temperatureData, status: status2 } =
-          await this.#reqeustGet(
+        const { data: temperatureData, status: status2 } = await this
+          .#reqeustGet(
             'current-weather.do',
-            `code=${resultCode.code}&unit=m%2Fs&aws=N`
+            `code=${resultCode.code}&unit=m%2Fs&aws=N`,
           );
         if (!temperatureData || status2 !== 200) {
           return FAIL_RESULT;
         }
 
-        const { temperature, windChill } =
-          this.#getTemperature(temperatureData);
+        const { temperature, windChill } = this.#getTemperature(
+          temperatureData,
+        );
         const { img, weather: weather2 } = this.#getSummary(data);
         const name = this.#getName(city, resultCode);
 
@@ -143,7 +144,7 @@ export class CityWeatherLoader {
           temp2: windChill,
           img: img,
         };
-      })
+      }),
     );
   }
 }

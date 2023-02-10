@@ -39,7 +39,7 @@ export class AfreecaSearchLoader {
             broadDescription: broad.b_broad_title,
             broadIcon: broad.broad_img,
           };
-        }
+        },
       );
       return results;
     } catch {

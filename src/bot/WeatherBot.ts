@@ -1,9 +1,9 @@
-import { Bot } from '../../common/data/Bot.d.ts';
+import { CityWeatherLoader } from '../lib/weather/CityWeatherLoader.ts';
+import { Bot } from '/framework/mod.ts';
 import {
   SocketClient,
   SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
-import { CityWeatherLoader } from '../lib/weather/CityWeatherLoader.ts';
+} from '/framework/src/network/SocketClient.d.ts';
 
 const TYPHOON_LINK =
   'https://earth.nullschool.net/ko/#current/wind/surface/level/overlay=total_cloud_water/orthographic=-228.58,29.11,1089';
@@ -51,7 +51,7 @@ export class WeatherBot implements Bot {
                 icon: result.img,
                 link: WEATHER_LINK,
                 orientation: 'horizontal',
-              })
+              }),
             );
           });
         });

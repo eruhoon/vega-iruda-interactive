@@ -1,11 +1,11 @@
-import { Bot } from '../../common/data/Bot.d.ts';
-import {
-  SocketClient,
-  SocketReceivedMessage,
-} from '../../common/network/SocketClient.d.ts';
 import { MapleCalendarLoader } from '../lib/maple/MapleCalendarLoader.ts';
 import { MapleEventLoader } from '../lib/maple/MapleEventLoader.ts';
 import { MapleUserLoader } from '../lib/maple/MapleUserLoader.ts';
+import { Bot } from '/framework/mod.ts';
+import {
+  SocketClient,
+  SocketReceivedMessage,
+} from '/framework/src/network/SocketClient.d.ts';
 
 export class MaplestoryBot implements Bot {
   readonly hash: string = 'maple-bot';
@@ -42,7 +42,7 @@ export class MaplestoryBot implements Bot {
                     icon: user.icon,
                     link: user.link,
                     orientation: 'vertical',
-                  })
+                  }),
                 );
               } else {
                 this.#client.sendChat(this.hash, '검색 실패');
