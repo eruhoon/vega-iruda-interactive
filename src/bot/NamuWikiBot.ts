@@ -26,7 +26,7 @@ export class NamuWikiBot implements Bot {
       if (text.startsWith('@꺼라 ') || text.startsWith('@나무위키 ')) {
         const match = /@.*? (.*)/.exec(text);
         const word = match ? match[1] : '';
-        this.#client.sendChat(this.hash, `https://namu.wiki/w/${word}`);
+        this.#client.sendChat(this.hash, `https://namu.wiki/Go?q=${word}`);
       }
     }
   }
