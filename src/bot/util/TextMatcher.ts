@@ -1,3 +1,5 @@
+import { ArgumentMatchResult } from './ArgumentMatchResult.d.ts';
+
 export class TextMatcher {
   readonly commandMark = '@';
 
@@ -15,7 +17,3 @@ export class TextMatcher {
       : { result: true, argument: arg };
   }
 }
-
-type ArgumentMatchFalseResult = { result: false };
-type ArgumentMatchTrueResult = { result: true; argument: string };
-type ArgumentMatchResult = ArgumentMatchTrueResult | ArgumentMatchFalseResult;
