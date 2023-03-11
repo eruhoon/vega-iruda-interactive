@@ -52,6 +52,13 @@ export class OnnadaBot implements Bot {
           this.hash,
           `https://onnada.com/character/search?q=${word}`,
         );
+      } else if (text.startsWith('@성우 ')) {
+        const match = / (.*)/.exec(text);
+        const word = match ? match[1] : '';
+        this.#client.sendChat(
+          this.hash,
+          `https://onnada.com/cv/search?q=${word}`,
+        );
       }
     }
   }
