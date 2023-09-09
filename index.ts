@@ -2,6 +2,7 @@ import { Config } from './common/config/Config.ts';
 import { ClockBot } from './src/bot/ClockBot.ts';
 import { CoronaBot } from './src/bot/CoronaBot.ts';
 import { DiceBot } from './src/bot/DiceBot.ts';
+import { EternalReturnBot } from './src/bot/EternalReturnBot.ts';
 import { LolGallBot } from './src/bot/LolGallBot.ts';
 import { LolInvenNewsBot } from './src/bot/LolInvenNewsBot.ts';
 import { MaplestoryBot } from './src/bot/MaplestoryBot.ts';
@@ -25,6 +26,7 @@ const lolInvenNewsBot = new LolInvenNewsBot(client);
 const weatherBot = new WeatherBot(client);
 const namuWikiBot = new NamuWikiBot(client);
 const onnadaBot = new OnnadaBot(client);
+const eternalReturnBot = new EternalReturnBot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -37,6 +39,7 @@ const bots: Bot[] = [
   weatherBot,
   namuWikiBot,
   onnadaBot,
+  eternalReturnBot,
 ];
 
 app.run(bots);
