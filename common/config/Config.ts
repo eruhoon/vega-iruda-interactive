@@ -8,6 +8,7 @@ class ConfigInit {
   twitchClientId = env.TWITCH_CLIENT_ID;
   twitchSecretKey = env.TWITCH_SECRET_KEY;
   twitchEmbedHost = env.TWITCH_EMBED_HOST;
+  eternalReturnApiKey = env.ETERNAL_RETURN_API_KEY;
 }
 
 export const Config = new ConfigInit();
