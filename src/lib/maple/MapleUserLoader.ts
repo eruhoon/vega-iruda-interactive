@@ -10,15 +10,18 @@ export class MapleUserLoader {
 
     const $icon = $profile.find('.character-image');
     const $name = $profile.find('.container h3 b');
-    const $level = $profile.find('.user-summary .user-summary-item').eq(0);
-    const $class = $profile.find('.user-summary .user-summary-item').eq(1);
+    const $level = $profile.find('.user-summary .user-summary-item').eq(1);
+    const $class = $profile.find('.user-summary .user-summary-item').eq(2);
 
     const name = $name?.text();
     const icon = $icon.attr('src')?.toString() || '';
-    const level = Number.parseInt($level.text().replace(/Lv.(\d+).*/, '$1'));
+    const levelText = $level.text();
+    const level = Number.parseInt(levelText.replace(/Lv.(\d+).*/, '$1'));
+    const expText = levelText.replace(/Lv.\d+\(([\d\.]+)\%\).*/, '$1');
+    const exp = Number.parseFloat(expText);
     const jobClass = $class.text();
     if (name) {
-      return { icon, name, level, jobClass, link: url };
+      return { icon, name, level, exp, jobClass, link: url };
     } else {
       return null;
     }
@@ -31,4 +34,5 @@ type MapleUser = {
   link: string;
   jobClass: string;
   level: number;
+  exp: number;
 };

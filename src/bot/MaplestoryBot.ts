@@ -54,7 +54,7 @@ export class MaplestoryBot implements Bot {
                 subtitle: `Lv.${user.level} ${user.jobClass}`,
                 icon: user.icon,
                 link: user.link,
-                orientation: 'vertical',
+                orientation: 'horizontal',
               })
             );
           } else {
