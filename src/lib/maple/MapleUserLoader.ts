@@ -6,12 +6,12 @@ export class MapleUserLoader {
     const res = await fetch(url);
     const body = await res.text();
     const $ = cheerio.load(body);
-    const $profile = $('#user-profile');
+    const $body = $('body');
 
-    const $icon = $profile.find('.character-image');
-    const $name = $profile.find('.container h3 b');
-    const $level = $profile.find('.user-summary .user-summary-item').eq(1);
-    const $class = $profile.find('.user-summary .user-summary-item').eq(2);
+    const $icon = $body.find('.character-image');
+    const $name = $body.find('.nickname');
+    const $level = $body.find('.level');
+    const $class = $body.find('.job');
 
     const name = $name?.text();
     const icon = $icon.attr('src')?.toString() || '';
