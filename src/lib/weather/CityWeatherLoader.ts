@@ -70,8 +70,7 @@ export class CityWeatherLoader {
         now.getHours() <= parsedHour &&
         parsedHour <= now.getHours() + 1
       );
-    });
-
+    }).first();
     const $fisrtWeatherSpan = $target.find('span.wic');
 
     const weatherAlt = $fisrtWeatherSpan.text() ||
