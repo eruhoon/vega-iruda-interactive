@@ -10,6 +10,7 @@ import { NamuWikiBot } from './src/bot/NamuWikiBot.ts';
 import { OnnadaBot } from './src/bot/OnnadaBot.ts';
 import { PengBot } from './src/bot/PengBot.ts';
 import { WeatherBot } from './src/bot/WeatherBot.ts';
+import { RandomPhotobot } from './src/bot/RandomPhotoBot.ts';
 
 import { Bot, IrudaApp } from '/framework/mod.ts';
 
@@ -27,6 +28,7 @@ const weatherBot = new WeatherBot(client);
 const namuWikiBot = new NamuWikiBot(client);
 const onnadaBot = new OnnadaBot(client);
 const eternalReturnBot = new EternalReturnBot(client);
+const randomPhotobot = new RandomPhotobot(client);
 
 const bots: Bot[] = [
   pengBot,
@@ -40,6 +42,7 @@ const bots: Bot[] = [
   namuWikiBot,
   onnadaBot,
   eternalReturnBot,
+  randomPhotobot,
 ];
 
 app.run(bots);
