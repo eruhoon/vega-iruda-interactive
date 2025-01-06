@@ -63,7 +63,7 @@ export class RandomPhotobot implements Bot {
               subtitle: photo.regDate,
               icon: photo.url,
               orientation: 'vertical',
-              showType: 'new-window',
+              showType: 'image-viewer',
             }),
           );
         }
